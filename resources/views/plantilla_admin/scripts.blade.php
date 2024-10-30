@@ -1,22 +1,29 @@
+<!-- Core Libraries -->
+<script src="{{ asset('admin_template/libs/jquery/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ asset('admin_template/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('admin_template/libs/simplebar/simplebar.min.js') }}"></script>
+
+<!-- Data & Map Libraries -->
 <script src="{{ asset('admin_template/data/stock-prices.js') }}"></script>
 <script src="{{ asset('admin_template/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
 <script src="{{ asset('admin_template/libs/jsvectormap/maps/world.js') }}"></script>
-<script src="{{ asset('admin_template/js/app.js') }}"></script>
 
+<!-- DataTables -->
+<script src="{{ asset('admin_template/libs/datatables/js/datatables.min.js') }}"></script>
 
-<!-- Sweet-Alert  -->
+<!-- SweetAlert -->
 <script src="{{ asset('admin_template/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('admin_template/js/pages/sweet-alert.init.js') }}"></script>
 
-<script src="{{ asset('admin_template/libs/jquery/jquery-3.7.1.min.js') }}"></script>
+<!-- SlimSelect -->
+<script src="{{ asset('admin_template/libs/slimselect/slimselect.min.js') }}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-<script
-    src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/r-3.0.3/sb-1.8.0/sl-2.1.0/datatables.js">
-</script>
+<!-- Pikaday Date Picker -->
+<script src="{{ asset('admin_template/libs/pikaday/pikaday.js') }}"></script>
+
+<!-- App Main Script -->
+<script src="{{ asset('admin_template/js/app.js') }}"></script>
+
 
 <script>
     //token
@@ -113,4 +120,8 @@
             }
         }))
     });
+
+    new SlimSelect({
+        select: '#selectInp'
+    })
 </script>

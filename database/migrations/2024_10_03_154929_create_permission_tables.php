@@ -75,7 +75,7 @@ return new class extends Migration
 
         });
 
-        Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames, $pivotRole, $teams) {
+        /* Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames, $pivotRole, $teams) {
             $table->unsignedBigInteger($pivotRole);
 
             $table->string('model_type');
@@ -95,6 +95,35 @@ return new class extends Migration
             } else {
                 $table->primary([$pivotRole, $columnNames['model_morph_key'], 'model_type'],
                     'model_has_roles_role_model_type_primary');
+            }
+        }); */
+        Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames, $pivotRole, $teams) {
+            // Crea una columna sin signo de tipo BigInteger para almacenar el ID del rol
+            $table->unsignedBigInteger($pivotRole);
+
+            // Crea una columna de tipo string para almacenar el tipo de modelo (ej: 'App\User')
+            $table->string('model_type')->default('App\Models\User');
+
+            // Crea una columna sin signo de tipo BigInteger para almacenar el ID del modelo
+            $table->unsignedBigInteger($columnNames['model_morph_key']);
+
+            // Crea un índice compuesto por las columnas 'model_morph_key' y 'model_type'
+            $table->index([$columnNames['model_morph_key'], 'model_type'], 'model_has_roles_model_id_model_type_index');
+
+            // Establece una restricción de clave foránea en la columna $pivotRole que apunta a la columna 'id' de la tabla 'roles'
+            $table->foreign($pivotRole)
+                ->references('id')
+                ->on($tableNames['roles'])
+                ->onDelete('cascade');
+
+            // Si $teams es true, se agregan columnas e índices adicionales para manejar equipos
+            if ($teams) {
+                $table->unsignedBigInteger($columnNames['team_foreign_key']);
+                $table->index($columnNames['team_foreign_key'], 'model_has_roles_team_foreign_key_index');
+                $table->primary([$columnNames['team_foreign_key'], $pivotRole, $columnNames['model_morph_key'], 'model_type'], 'model_has_roles_role_model_type_primary');
+            } else {
+                // Si $teams es false, se establece una clave primaria compuesta por las columnas $pivotRole, $columnNames['model_morph_key'] y 'model_type'
+                $table->primary([$pivotRole, $columnNames['model_morph_key'], 'model_type'], 'model_has_roles_role_model_type_primary');
             }
         });
 

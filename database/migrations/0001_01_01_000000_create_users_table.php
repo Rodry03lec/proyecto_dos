@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('apellidos', 100);
             $table->string('estado', 20);
             $table->unsignedBigInteger('id_persona')->nullable();
-            $table->string('email')->unique();
+            $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

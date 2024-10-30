@@ -3,6 +3,7 @@
 use App\Http\Controllers\Usuario\Controlador_login;
 use App\Http\Controllers\Usuario\Controlador_permisos;
 use App\Http\Controllers\Usuario\Controlador_rol;
+use App\Http\Controllers\Usuario\Controlador_user;
 use App\Http\Controllers\Usuario\Controlador_usuario;
 use App\Http\Middleware\Autenticados;
 use App\Http\Middleware\No_autenticados;
@@ -42,4 +43,8 @@ Route::prefix('/admin')->middleware([Autenticados::class])->group(function(){
 
     //PARA EL ROL
     Route::resource('roles', Controlador_rol::class);
+
+    //para la administracion de usuarios
+    Route::resource('user', Controlador_user::class);
+    Route::post('/user/listar', [Controlador_user::class, 'listar'])->name('user.listar');
 });

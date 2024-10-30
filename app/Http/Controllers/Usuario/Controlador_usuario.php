@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Perfil\UpdatePasswordRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +17,7 @@ class Controlador_usuario extends Controller
      */
     public function perfil()
     {
-        $menu = 0;
-        return view('administrador.perfil', [
-            'menu' => $menu
-        ]);
+        return view('administrador.perfil');
     }
     /**
      * FIN DE LA PARTE DE PERFIL
